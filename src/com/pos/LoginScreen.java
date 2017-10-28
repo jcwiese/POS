@@ -15,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Panel;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -123,7 +125,7 @@ public class LoginScreen {
 
 private void checkLogin()
 {
-		Connection con = openSQL();
+		Connection con = new SQLConnection().openSQL();
 		Statement stmt;
 		try {
 			stmt = con.createStatement();
@@ -138,12 +140,14 @@ private void checkLogin()
 				lblErrorbox.setText("");
 				lblErrorbox.setEnabled(false);
 				int id = r.getInt("UserID");
+				con.close();
 				Login(id);
 			}
 			else 
 			{
 				lblErrorbox.setText("INVALID LOGIN");
 				lblErrorbox.setEnabled(true);
+				con.close();
 			}
 			
 			
@@ -156,19 +160,8 @@ private void checkLogin()
 private void Login(int id) 
 {
 	// TODO Login to POS with provided ID
+	this.frmCmscPos.dispose();
+	new MainPOSScreen(id);
 	
 }
-
-private Connection openSQL()
-{
-	try {
-	String server = "jdbc:sqlserver://localhost\\POS;databaseName=POS;user=sa;password=cmsc495;";
-	return (DriverManager.getConnection(server));}
-	catch(SQLException e) 
-	{
-		e.printStackTrace();
-		return null;
-	}
-}
-
 }
