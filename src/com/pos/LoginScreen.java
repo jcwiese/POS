@@ -96,7 +96,7 @@ public class LoginScreen {
 		UserIDField.setColumns(10);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(237, 246, 52, 14);
+		lblPassword.setBounds(237, 246, 69, 14);
 		panel.add(lblPassword);
 		
 		passwordField = new JPasswordField();
@@ -159,7 +159,6 @@ private void checkLogin()
 
 private void Login(int id) 
 {
-	// TODO Login to POS with provided ID
 	this.frmCmscPos.dispose();
 	new MainPOSScreen(id);
 	
