@@ -1,5 +1,13 @@
 package com.pos;
 
+/*
+ *	Group Charlie 
+ * 	CMSC 495
+ * 	University of Maryland, University College
+ * 
+ * 	Description: This Class starts the program with a login screen, to then transfer to the POS program when login is successful
+ */
+
 import java.awt.EventQueue;
 import java.sql.*;
 
