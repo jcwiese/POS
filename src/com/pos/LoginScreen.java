@@ -23,7 +23,6 @@ import javax.swing.GroupLayout.Alignment;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.BoxLayout;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.border.CompoundBorder;
 import javax.xml.bind.DatatypeConverter;
 import javax.swing.JMenuBar;
@@ -141,7 +140,6 @@ private void checkLogin()
 			
 			
 		} catch (SQLException | NoSuchAlgorithmException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
