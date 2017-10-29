@@ -149,7 +149,7 @@ public class AdminScreen
 			Connection con = new SQLConnection().openSQL();
 			try {
 				
-				String passhash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(password1.getText().toString().getBytes("UTF-8")));
+				String passhash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("SHA-256").digest(password1.getText().toString().getBytes("UTF-8")));
 				String fname = FirstName.getText().toString();
 				String lname = LastName.getText().toString();
 				String id = ID_Field.getText().toString();

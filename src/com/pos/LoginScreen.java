@@ -129,7 +129,7 @@ private void checkLogin()
 		Statement stmt;
 		try {
 			stmt = con.createStatement();
-			String hash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(passwordField.getText().toString().getBytes("UTF-8")));
+			String hash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("SHA-256").digest(passwordField.getText().toString().getBytes("UTF-8")));
 			String sq= "SELECT UserId from USERS WHERE [LoginID] = ? AND [Password] = ?";
 			PreparedStatement ps = con.prepareStatement(sq);
 			ps.setString(1, UserIDField.getText().toString());
