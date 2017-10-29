@@ -148,19 +148,39 @@ public class AdminScreen
 			//TODO: Add more filters for id/first&LastName sanity check
 			Connection con = new SQLConnection().openSQL();
 			try {
+				
 				String passhash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(password1.getText().toString().getBytes("UTF-8")));
 				String fname = FirstName.getText().toString();
 				String lname = LastName.getText().toString();
 				String id = ID_Field.getText().toString();
-				String insert = "INSERT INTO USERS ([LoginID],[Password],[FirstName],[LastName]) VALUES (?,?,?,?)";
-				PreparedStatement ps = con.prepareStatement(insert);
-				ps.setString(1, id);
-				ps.setString(2, passhash);
-				ps.setString(3,fname);
-				ps.setString(4,lname);
-				ps.execute();
-				con.close();
-				textPane.setText(fname + " " + lname + " Has been added successfully!");
+				if(id.trim().isEmpty())
+				{
+					textPane.setText("Login ID Can not Be Blank!");
+				}
+				else if(p1.trim().isEmpty())
+				{
+					textPane.setText("Password Can not Be Blank!");
+				}
+				else if(fname.trim().isEmpty())
+				{
+					textPane.setText("FirstName Name Can not Be Blank!");
+				}
+				else if(lname.trim().isEmpty())
+				{
+					textPane.setText("LastName Name Can not Be Blank!");
+				}
+				else
+				{
+					String insert = "INSERT INTO USERS ([LoginID],[Password],[FirstName],[LastName]) VALUES (?,?,?,?)";
+					PreparedStatement ps = con.prepareStatement(insert);
+					ps.setString(1, id);
+					ps.setString(2, passhash);
+					ps.setString(3,fname);
+					ps.setString(4,lname);
+					ps.execute();
+					con.close();
+					textPane.setText(fname + " " + lname + " Has been added successfully!");
+				}
 			}
 			catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException e) 
 			{
