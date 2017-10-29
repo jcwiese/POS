@@ -17,17 +17,13 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.xml.bind.DatatypeConverter;
-
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.awt.event.ActionEvent;
 
 public class AdminScreen
@@ -145,7 +141,9 @@ public class AdminScreen
 	}
 	protected void CheckData() 
 	{
-		if(password1.getPassword() == Password2.getPassword())
+		String p1 = password1.getText().toString();
+		String p2 = Password2.getText().toString();
+		if(p1.equals(p2))
 		{
 			//TODO: Add more filters for id/first&LastName sanity check
 			Connection con = new SQLConnection().openSQL();
@@ -153,19 +151,19 @@ public class AdminScreen
 				String passhash = DatatypeConverter.printHexBinary(MessageDigest.getInstance("MD5").digest(password1.getText().toString().getBytes("UTF-8")));
 				String fname = FirstName.getText().toString();
 				String lname = LastName.getText().toString();
-				String insert = "INSERT INTO USERS ([UserID],[Password],[FirstName],[LastName]";
+				String id = ID_Field.getText().toString();
+				String insert = "INSERT INTO USERS ([LoginID],[Password],[FirstName],[LastName]) VALUES (?,?,?,?)";
 				PreparedStatement ps = con.prepareStatement(insert);
-				ps.setString(1, ID_Field.getText().toString());
+				ps.setString(1, id);
 				ps.setString(2, passhash);
 				ps.setString(3,fname);
 				ps.setString(4,lname);
-				ps.executeQuery();
+				ps.execute();
 				con.close();
 				textPane.setText(fname + " " + lname + " Has been added successfully!");
 			}
 			catch (NoSuchAlgorithmException | UnsupportedEncodingException | SQLException e) 
 			{
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

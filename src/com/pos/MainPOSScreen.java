@@ -61,6 +61,11 @@ public class MainPOSScreen
 		
 		JPanel panel = new JPanel();
 		POSframe.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblDemo = new JLabel("This is where POS program goes");
+		lblDemo.setBounds(291, 219, 264, 107);
+		panel.add(lblDemo);
 		
 		JMenuBar menuBar = new JMenuBar();
 		POSframe.setJMenuBar(menuBar);
@@ -85,6 +90,23 @@ public class MainPOSScreen
 					logout();
 				}
 	        });
+		
+		JMenuItem mntmAdmin = new JMenuItem("Administrative Tasks");
+		mntmAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent g) 
+			{
+				addAdminScreen();
+			}
+
+			private void addAdminScreen() 
+			{
+				AdminScreen a = new AdminScreen();
+				//TODO fix bug where closing window closes out of program completely.
+				//Bug will cause both windows to close when closing admin screen, but leaves admin screen open when closing Main Screen.
+				
+			}
+        });
+		mnFile.add(mntmAdmin);
 		mnFile.add(mntmLogOut);
 		mnFile.add(mntmExit);
 		
@@ -95,10 +117,11 @@ public class MainPOSScreen
 	
 	}
 
+
+
 	protected void logout() 
 	{
 		this.POSframe.dispose();
 		new LoginScreen();
 	}
-	
 }
